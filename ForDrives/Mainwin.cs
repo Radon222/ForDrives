@@ -6,32 +6,32 @@ using Microsoft.Win32;
 
 namespace ForDrives
 {
-    
-    public partial class TMainWin : Form
+
+    public partial class MainWindow : Form
     {
-        const string LMPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer";
-        const string CUPath = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer";
-        const string ND = "NoDrives";
-        const string NV = "NoViewOnDrive";
-        const string Testvalue = "ForDrivesTested";
-        public string mboxInfo = Application.ProductName + " Tips";
+        private const string LMPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer";
+        private const string CUPath = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer";
+        private const string ND = "NoDrives";
+        private const string NV = "NoViewOnDrive";
+        private string mboxInfo = Application.ProductName + " Tips";
         public delegate void TBDelegate(TextBox thectrl, string thetxt);
-        
-        public TMainWin()
+
+        private AppCore kernel;
+
+        public MainWindow()
         {
             InitializeComponent();
+            kernel = new AppCore();
         }
-        
+
         private void tMainWin_Load(object sender, EventArgs e)
         {
             Text = Application.ProductName + " [Version " + Application.ProductVersion + "]";
-            try
+            if (!kernel.LocalMachineAccessTest())
             {
-                Registry.SetValue(LMPath, Testvalue, 1);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(Application.ProductName + " 无法写入注册表，请保证您具有管理员权限后再运行本程序！\n" + ex.Message, mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("请保证您具有管理员权限后再运行本程序！\n", 
+                    mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
             RefreshDrvs();
         }
@@ -48,74 +48,21 @@ namespace ForDrives
 
         private void RefreshDrvs()
         {
-             Settext(ShowCH ,GetDrvChars(ND));
-             Settext(CUNoView, GetDrvChars(NV));
+            Settext(ShowCH, kernel.getNoDrives());
+            Settext(CUNoView, kernel.getNoViewOnDrive());
         }
 
-        private int GettValue(string Path, string Strs)
-        {
-            try
-            {
-                return Convert.ToInt32(Registry.GetValue(Path, Strs, -1));
-            }
-            catch
-            {
-                return -1;
-            }            
-        }
-
-        private string GetDrvChars(string tp)
-        {
-            string functionReturnValue = "";
-            int LM = GettValue(LMPath, tp);
-            int CU = GettValue(CUPath, tp);
-            if (LM >= 0) return (ToChars(LM));
-            if (CU > 0) return (ToChars(CU));
-            return functionReturnValue;
-        }
-
-        private string ToChars(int N)
-        {
-            string functionReturnValue = null;
-            int t = 0;
-            int m = N;
-            bool[] a = new bool[27];
-            if ((N <= 0) | (N > 67108863)) return ("");
-            while (m > 0)
-            {
-                t++;
-                if (m % 2 == 1) a[t] = true;
-                else a[t] = false;
-                m = m / 2;
-            }
-            for (int i = 1; i <= 26; i++) if (a[i]) functionReturnValue = functionReturnValue + Convert.ToChar(i + 64);
-            return functionReturnValue;
-        }        
-        
-        private int ToNumbers(string S)
-        {
-            int functionReturnValue = 0;            
-            bool[] CHS = new bool[27];
-            for (int i = 0; i <= S.Length - 1; i++)
-            {
-                if ((Convert.ToByte(S[i]) < 65) | (Convert.ToByte(S[i]) > 90)) continue;
-                else CHS[Convert.ToByte(S[i]) - 64] = true;
-            }
-            for (int i = 1; i <= 26; i++) if (CHS[i]) functionReturnValue = functionReturnValue + Convert.ToInt32(Math.Pow(Convert.ToDouble(2), Convert.ToDouble(i - 1)));
-            return functionReturnValue;
-        }
-        
         private void SaveDrvSettings(string Path, string TP, string TheS)
         {
-            try
+            if (kernel.SaveToRegistry(Path, TP, TheS))
             {
-                Registry.SetValue(Path, TP, ToNumbers(TheS), RegistryValueKind.DWord);
                 RefreshDrvs();
                 ReturnOK();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("写入注册表时发生错误，可能是 " + Application.ProductName + " 被禁止访问注册表。\n" + ex.Message, mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("写入注册表时发生错误，可能是 " + Application.ProductName + " 被禁止访问注册表。\n",
+                    mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -129,13 +76,15 @@ namespace ForDrives
             }
             catch (Exception ex)
             {
-                MessageBox.Show("删除原设置时发生错误，可能是 " + Application.ProductName + " 被禁止访问注册表。\n" + ex.Message, mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("删除原设置时发生错误，可能是 " + Application.ProductName + " 被禁止访问注册表。\n" + ex.Message,
+                    mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void ReturnOK()
         {
-            MessageBox.Show("设置完成，新的设置需要（注销并重新登录您的用户）或（重新启动计算机）后才能生效。", mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("设置完成，新的设置需要（注销并重新登录您的用户）或（重新启动计算机）后才能生效。",
+                mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void HideDrv_MouseEnter(object sender, EventArgs e)
@@ -164,9 +113,10 @@ namespace ForDrives
             W.Dispose();
         }
 
-        private void NoD(object sender,EventArgs e)
-        {           
-            if (ToLM.Checked) SaveDrvSettings(LMPath, ND, NewOrder.Text);
+        private void NoD(object sender, EventArgs e)
+        {
+            if (ToLM.Checked)
+                SaveDrvSettings(LMPath, ND, NewOrder.Text);
             else
             {
                 DelDrvSettings(ND);
@@ -176,7 +126,8 @@ namespace ForDrives
 
         private void NoV(object sender, EventArgs e)
         {
-            if (ToLM.Checked) SaveDrvSettings(LMPath, NV, NewNoView.Text);
+            if (ToLM.Checked)
+                SaveDrvSettings(LMPath, NV, NewNoView.Text);
             else
             {
                 DelDrvSettings(NV);
@@ -193,22 +144,40 @@ namespace ForDrives
         {
             try
             {
-                System.Diagnostics.Process.Start("http://blog.163.com/Steven_Radon/");
+                System.Diagnostics.Process.Start("http://github.com/radon222");
                 linkTo.LinkVisited = true;
             }
             catch
             {
+
+            }
+        }
+
+        private void killExplorers()
+        {
+            try
+            {
+                foreach (Process p in Process.GetProcessesByName("Explorer"))
+                    p.Kill();
+            }
+            catch (Exception)
+            {
+
             }
         }
 
         private void TakeEffects_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("执行此命令后，您的桌面和任务栏会暂时丢失，您确认要执行此命令吗？", mboxInfo, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("执行此命令后，您的桌面和任务栏会暂时丢失，您确认要执行此命令吗？",
+                mboxInfo, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                foreach (Process p in Process.GetProcessesByName("Explorer")) p.Kill();
-                MessageBox.Show("请稍候，您的桌面和任务栏将在数秒后恢复。如果您的桌面和任务栏没有自动恢复，请通过（任务管理器执行新任务“Explorer”）来恢复桌面。", mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                killExplorers();
+                MessageBox.Show("请稍候，您的桌面和任务栏将在数秒后恢复。如果您的桌面和任务栏没有自动恢复，请通过（任务管理器执行新任务“Explorer”）来恢复桌面。",
+                    mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else MessageBox.Show("您可以通过（注销并重新登录您的用户）或（重新启动计算机）来使新的设置生效。", mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("您可以通过（注销并重新登录您的用户）或（重新启动计算机）来使新的设置生效。",
+                    mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void WriteItIn_Click(object sender, EventArgs e)

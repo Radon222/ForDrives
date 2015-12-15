@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppCore.cs" />
     <Compile Include="Mainwin.cs">
       <SubType>Form</SubType>
     </Compile>

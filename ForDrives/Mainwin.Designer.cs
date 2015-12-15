@@ -1,6 +1,6 @@
 ﻿namespace ForDrives
 {
-    partial class TMainWin
+    partial class MainWindow
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TMainWin));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.GroupBoxIt = new System.Windows.Forms.GroupBox();
             this.ToLM = new System.Windows.Forms.RadioButton();
             this.ToCU = new System.Windows.Forms.RadioButton();
@@ -94,8 +94,8 @@
             // 
             // MainTab
             // 
-            this.MainTab.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainTab.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.MainTab.Controls.Add(this.HideDrv);
             this.MainTab.Controls.Add(this.DisallowView);
             this.MainTab.HotTrack = true;
@@ -160,7 +160,7 @@
             // 
             this.Label1.AutoSize = true;
             this.Label1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Label1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Label1.Location = new System.Drawing.Point(6, 4);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(152, 17);
@@ -193,11 +193,11 @@
             this.DisallowView.Controls.Add(this.Label3);
             this.DisallowView.Controls.Add(this.NewNoView);
             this.DisallowView.Controls.Add(this.CUNoView);
-            this.DisallowView.Location = new System.Drawing.Point(4, 26);
+            this.DisallowView.Location = new System.Drawing.Point(4, 22);
             this.DisallowView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DisallowView.Name = "DisallowView";
             this.DisallowView.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.DisallowView.Size = new System.Drawing.Size(358, 140);
+            this.DisallowView.Size = new System.Drawing.Size(358, 144);
             this.DisallowView.TabIndex = 1;
             this.DisallowView.Text = "禁止浏览驱动器";
             this.DisallowView.UseVisualStyleBackColor = true;
@@ -300,7 +300,7 @@
             this.TakeEffects.UseVisualStyleBackColor = true;
             this.TakeEffects.Click += new System.EventHandler(this.TakeEffects_Click);
             // 
-            // TMainWin
+            // MainWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.Backerb;
@@ -310,12 +310,12 @@
             this.Controls.Add(this.GroupBoxIt);
             this.Controls.Add(this.MainTab);
             this.Controls.Add(this.Backerb);
-            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
-            this.Name = "TMainWin";
+            this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ForDrives";
             this.Load += new System.EventHandler(this.tMainWin_Load);
