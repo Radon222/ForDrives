@@ -39,7 +39,7 @@ namespace ForDrives.Services.Core
             throw new NotImplementedException();
         }
 
-        public bool TestAccess()
+        public bool LocalMachineAccessTest()
         {
             throw new NotImplementedException();
         }

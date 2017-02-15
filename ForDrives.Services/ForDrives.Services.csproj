@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\CustomRegistryService.cs" />
     <Compile Include="Core\InterpretationService.cs" />
     <Compile Include="Interfaces\IDrivesService.cs" />
     <Compile Include="Interfaces\IInterpretationService.cs" />
+    <Compile Include="Interfaces\ICustomRegistryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\DrivesAccessibilityService.cs" />
     <Compile Include="Core\DrivesVisibilityService.cs" />

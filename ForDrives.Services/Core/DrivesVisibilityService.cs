@@ -10,8 +10,10 @@ namespace ForDrives.Services.Core
 {
     public class DrivesVisibilityService : IDrivesService
     {
+        private const string fakeValueName = "ForDrivesTested";
         private const string valueName = "NoDrives";
         private IInterpretationService interpreter;
+        private ICustomRegistryService regeditor;
 
         private bool forLocalMachine;
 
@@ -33,36 +35,10 @@ namespace ForDrives.Services.Core
             interpreter = new InterpretationService();
         }
 
-        private int getRegValue(string Path, string Strs)
-        {
-            try
-            {
-                var result = (int)Registry.GetValue(Path, Strs, -1);
-                return result;
-            }
-            catch
-            {
-                return -1;
-            }
-        }
-
-        private bool saveToRegistry(string keyName, string valueName, object value)
-        {
-            try
-            {
-                Registry.SetValue(keyName, valueName, value, RegistryValueKind.DWord);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
         private string getDrivesString()
         {
-            int LM = getRegValue(StaticValues.LocalMachinePath, valueName);
-            int CU = getRegValue(StaticValues.CurrentUserPath, valueName);
+            int LM = regeditor.GetValue(StaticValues.LocalMachinePath, valueName);
+            int CU = regeditor.GetValue(StaticValues.CurrentUserPath, valueName);
             if (LM >= 0)
                 return (interpreter.ToLetters(LM));
             if (CU > 0)
@@ -96,12 +72,13 @@ namespace ForDrives.Services.Core
         {
             int value = interpreter.ToNumber(userInput);
             string targetPath = forLocalMachine ? StaticValues.LocalMachinePath : StaticValues.CurrentUserPath;
-            return saveToRegistry(targetPath, valueName, value);
+            return regeditor.SetValue(targetPath, valueName, value);
         }
 
-        public bool TestAccess()
+        public bool LocalMachineAccessTest()
         {
-            throw new NotImplementedException();
+            string targetPath = forLocalMachine ? StaticValues.LocalMachinePath : StaticValues.CurrentUserPath;
+            return regeditor.SetValue(targetPath, fakeValueName, 1);
         }
     }
 }
