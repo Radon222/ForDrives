@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDrives", "ForDrives\ForDrives.csproj", "{86B68ABE-B8D9-463A-9D77-64C8609CBBD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDrives.Services", "ForDrives.Services\ForDrives.Services.csproj", "{89ECB21F-E5F0-4F6A-A129-AF647547413F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,10 @@ Global
 		{86B68ABE-B8D9-463A-9D77-64C8609CBBD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86B68ABE-B8D9-463A-9D77-64C8609CBBD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86B68ABE-B8D9-463A-9D77-64C8609CBBD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89ECB21F-E5F0-4F6A-A129-AF647547413F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89ECB21F-E5F0-4F6A-A129-AF647547413F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89ECB21F-E5F0-4F6A-A129-AF647547413F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89ECB21F-E5F0-4F6A-A129-AF647547413F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
