@@ -7,42 +7,10 @@ using System.Threading.Tasks;
 
 namespace ForDrives.Services.Core
 {
-    public class DrivesAccessibilityService : IDrivesService
+    public class DrivesAccessibilityService : DrivesService
     {
-        private bool forLocalMachine;
-
-        public bool ForLocalMachine
+        public DrivesAccessibilityService() : base("NoViewOnDrive")
         {
-            get
-            {
-                return forLocalMachine;
-            }
-
-            set
-            {
-                forLocalMachine = value;
-            }
         }
-
-        public string GetCurrentSettings()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool RemoveGlobalSettings()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool SaveNewSettings(string userInput)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool LocalMachineAccessTest()
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

@@ -11,5 +11,6 @@ namespace ForDrives.Services
         public const string LocalMachinePath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer";
         public const string CurrentUserPath = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer";
         public const string PartialPath = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer";
+        public const string TestValueName = "ForDrivesTested";
     }
 }
