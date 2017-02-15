@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ForDrives.Services")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ForDrives Services")]
+[assembly: AssemblyDescription("ForDrives Services")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ForDrives.Services")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("Alien Laboratory")]
+[assembly: AssemblyProduct("ForDrives Services")]
+[assembly: AssemblyCopyright("Copyright © Alien Laboratory 2017")]
+[assembly: AssemblyTrademark("ALI")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

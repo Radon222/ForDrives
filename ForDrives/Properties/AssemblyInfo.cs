@@ -8,10 +8,10 @@ using System.Resources;
 [assembly: AssemblyTitle("ForDrives")]
 [assembly: AssemblyDescription("帮助您在 Windows 资源管理器中隐藏或禁止浏览某些驱动器")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Radon Laboratory")]
+[assembly: AssemblyCompany("Alien Laboratory")]
 [assembly: AssemblyProduct("ForDrives")]
-[assembly: AssemblyCopyright("Copyleft (uc) Radon Laboratory 2007")]
-[assembly: AssemblyTrademark("Rn")]
+[assembly: AssemblyCopyright("Copyright © Alien Laboratory 2017")]
+[assembly: AssemblyTrademark("ALI")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型
@@ -32,6 +32,6 @@ using System.Resources;
 // 可以指定所有这些值，也可以使用“内部版本号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.5.0.0")]
-[assembly: AssemblyFileVersion("1.5.0.0")]
-[assembly: NeutralResourcesLanguageAttribute("zh-CHS")]
+[assembly: AssemblyVersion("1.6.0.0")]
+[assembly: AssemblyFileVersion("1.6.0.0")]
+[assembly: NeutralResourcesLanguage("zh-CN")]

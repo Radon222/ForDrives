@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using ForDrives.Services.Core;
 
 namespace ForDrives
 {
@@ -29,7 +30,7 @@ namespace ForDrives
             Text = Application.ProductName + " [Version " + Application.ProductVersion + "]";
             if (!kernel.LocalMachineAccessTest())
             {
-                MessageBox.Show("请保证您具有管理员权限后再运行本程序！\n", 
+                MessageBox.Show("请保证您具有管理员权限后再运行本程序！\n",
                     mboxInfo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
@@ -48,8 +49,10 @@ namespace ForDrives
 
         private void RefreshDrvs()
         {
-            Settext(ShowCH, kernel.getNoDrives());
-            Settext(CUNoView, kernel.getNoViewOnDrive());
+            var noDrivesService = new DrivesVisibilityService();
+            var noViewDriveService = new DrivesAccessibilityService();
+            Settext(ShowCH, noDrivesService.GetCurrentSettings());
+            Settext(CUNoView, noViewDriveService.GetCurrentSettings());
         }
 
         private void SaveDrvSettings(string Path, string TP, string TheS)
