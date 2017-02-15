@@ -74,8 +74,7 @@ namespace ForDrives.Services.Core
 
         public bool LocalMachineAccessTest()
         {
-            string targetPath = forLocalMachine ? StaticValues.LocalMachinePath : StaticValues.CurrentUserPath;
-            return regeditor.SetValue(targetPath, StaticValues.TestValueName, 1);
+            return regeditor.SetValue(StaticValues.LocalMachinePath, StaticValues.TestValueName, 1);
         }
     }
 }
