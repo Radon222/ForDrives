@@ -15,14 +15,9 @@ namespace ForDrives
         private const string NoDriveSignal = "NoDrives";
         private const string NoViewSignal = "NoViewOnDrive";
 
-        private IDrivesService noDrivesService;
-        private IDrivesService noViewDriveService;
-
         public MainWindow()
         {
             InitializeComponent();
-            noDrivesService = new DrivesVisibilityService();
-            noViewDriveService = new DrivesAccessibilityService();
             mboxInfo = Application.ProductName + " Tips";
         }
 
@@ -30,6 +25,7 @@ namespace ForDrives
         {
             Text = Application.ProductName + " [Version " + Application.ProductVersion + "]";
 
+            var noDrivesService = new DrivesVisibilityService();
             if (!noDrivesService.LocalMachineAccessTest())
             {
                 MessageBox.Show("请保证您具有管理员权限后再运行本程序！\n",
@@ -52,8 +48,10 @@ namespace ForDrives
 
         private void ReloadSettings()
         {
-            SetText(ShowCH, noDrivesService.GetCurrentSettings());
-            SetText(CUNoView, noViewDriveService.GetCurrentSettings());
+            var service1 = new DrivesVisibilityService();
+            var service2 = new DrivesAccessibilityService();
+            SetText(ShowCH, service1.GetCurrentSettings());
+            SetText(CUNoView, service2.GetCurrentSettings());
         }
 
         private void cannotSaveSetting()
@@ -97,7 +95,6 @@ namespace ForDrives
                     break;
             }
             W.RunWorkerAsync();
-            W.Dispose();
         }
 
         private void ApplySetting(IDrivesService driveService, string userInput, bool isLocalMachine)
@@ -114,10 +111,13 @@ namespace ForDrives
                 showOK();
             else
                 cannotSaveSetting();
+
+            ReloadSettings();
         }
 
         private void NoD(object sender, EventArgs e)
         {
+            var noDrivesService = new DrivesVisibilityService();
             string userInput = NewOrder.Text;
             bool isLocalMachine = ToLM.Checked;
             ApplySetting(noDrivesService, userInput, isLocalMachine);
@@ -125,6 +125,7 @@ namespace ForDrives
 
         private void NoV(object sender, EventArgs e)
         {
+            var noViewDriveService = new DrivesAccessibilityService();
             string userInput = NewNoView.Text;
             bool isLocalMachine = ToLM.Checked;
             ApplySetting(noViewDriveService, userInput, isLocalMachine);
