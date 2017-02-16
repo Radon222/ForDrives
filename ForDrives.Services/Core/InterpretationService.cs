@@ -1,5 +1,7 @@
 ﻿using ForDrives.Services.Interfaces;
 using System;
+using System.Linq;
+using System.Text;
 
 namespace ForDrives.Services.Core
 {
@@ -7,24 +9,15 @@ namespace ForDrives.Services.Core
     {
         public string ToLetters(int number)
         {
-            string result = null;
-            int t = 0;
-            int m = number;
-            bool[] a = new bool[27];
-            if ((number <= 0) | (number > 67108863))
-                return ("");
-            while (m > 0)
-            {
-                t++;
-                if (m % 2 == 1)
-                    a[t] = true;
-                else
-                    a[t] = false;
-                m = m / 2;
-            }
-            for (int i = 1; i <= 26; i++)
-                if (a[i])
-                    result += (char)(i + 64);
+            string result = "";
+            if ((number <= 0) || (number > 67108863))
+                return result;
+
+            string binaryString = Convert.ToString(number, 2).PadLeft(26, '0');
+            var reversedBinaryStr = binaryString.Reverse().ToList();
+            for (int i = 0; i < reversedBinaryStr.Count; i++)            
+                result += reversedBinaryStr[i] == '1' ? ((char)(i + 65)).ToString() : "";
+            
             return result;
         }
 
