@@ -24,7 +24,7 @@ namespace ForDrives.Services.Core
             }
             for (int i = 1; i <= 26; i++)
                 if (a[i])
-                    result += Convert.ToChar(i + 64);
+                    result += (char)(i + 64);
             return result;
         }
 
@@ -34,14 +34,14 @@ namespace ForDrives.Services.Core
             bool[] CHS = new bool[27];
             for (int i = 0; i <= letters.Length - 1; i++)
             {
-                if ((Convert.ToByte(letters[i]) < 65) | (Convert.ToByte(letters[i]) > 90))
+                if (((byte)letters[i] < 65) | ((byte)letters[i] > 90))
                     continue;
                 else
-                    CHS[Convert.ToByte(letters[i]) - 64] = true;
+                    CHS[(byte)letters[i] - 64] = true;
             }
             for (int i = 1; i <= 26; i++)
                 if (CHS[i])
-                    result += Convert.ToInt32(Math.Pow(Convert.ToDouble(2), Convert.ToDouble(i - 1)));
+                    result += (int)Math.Pow(2, (i - 1));
             return result;
         }
     }

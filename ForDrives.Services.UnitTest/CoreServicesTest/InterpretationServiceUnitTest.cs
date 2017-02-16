@@ -58,6 +58,16 @@ namespace ForDrives.Services.UnitTest
         }
 
         [TestMethod]
+        public void ToLettersTest6()
+        {
+            var interpreter = new InterpretationService();
+            var expected = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var actual = interpreter.ToLetters(67108863);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void ToNumberTest1()
         {
             var interpreter = new InterpretationService();
@@ -103,6 +113,16 @@ namespace ForDrives.Services.UnitTest
             var interpreter = new InterpretationService();
             var expected = 7;
             var actual = interpreter.ToNumber("ABC");
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ToNumberTest6()
+        {
+            var interpreter = new InterpretationService();
+            var expected = 67108863;
+            var actual = interpreter.ToNumber("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
             Assert.AreEqual(expected, actual);
         }
