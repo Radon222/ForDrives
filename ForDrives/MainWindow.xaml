@@ -44,9 +44,9 @@
                 <Grid>
                     <StackPanel>
                         <Label Style="{StaticResource LabelMargin}">Current settings:</Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" IsReadOnly="True"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}" IsReadOnly="True" Text="{Binding CurrentSetting_Visibility}"></TextBox>
                         <Label Style="{StaticResource LabelMargin}">New settings to be applied:</Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" CharacterCasing="Upper"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}" CharacterCasing="Upper" Text="{Binding NewSetting_Visibility}"></TextBox>
                         <Label Style="{StaticResource LabelMargin}">If you want to disable the setting, just leave the above field empty</Label>
                         <Button Style="{StaticResource ButtonStyle}" Content="Apply"></Button>
                     </StackPanel>
@@ -56,9 +56,9 @@
                 <Grid>
                     <StackPanel>
                         <Label Style="{StaticResource LabelMargin}">Current settings:</Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" IsReadOnly="True"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}" IsReadOnly="True" Text="{Binding CurrentSetting_Accessibilty}"></TextBox>
                         <Label Style="{StaticResource LabelMargin}">New settings to be applied:</Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" CharacterCasing="Upper"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}" CharacterCasing="Upper" Text="{Binding NewSetting_Accessibilty}"></TextBox>
                         <Label Style="{StaticResource LabelMargin}">If you want to disable the setting, just leave the above field empty</Label>
                         <Button Style="{StaticResource ButtonStyle}" Content="Apply"></Button>
                     </StackPanel>
