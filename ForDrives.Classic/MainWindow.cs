@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using ForDrives.Services.Core;
 using ForDrives.Services.Interfaces;
 
-namespace ForDrives
+namespace ForDrives.Classic
 {
     public partial class MainWindow : Form
     {

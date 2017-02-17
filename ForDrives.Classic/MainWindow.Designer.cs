@@ -1,4 +1,4 @@
-﻿namespace ForDrives
+﻿namespace ForDrives.Classic
 {
     partial class MainWindow
     {
@@ -94,7 +94,7 @@
             // 
             // MainTab
             // 
-            this.MainTab.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.MainTab.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainTab.Controls.Add(this.HideDrv);
             this.MainTab.Controls.Add(this.DisallowView);
