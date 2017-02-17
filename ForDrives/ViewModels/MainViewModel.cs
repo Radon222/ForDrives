@@ -7,22 +7,66 @@ using System.Text;
 using System.Windows.Input;
 using ForDrives.Helpers;
 using System.Windows;
+using WinForm = System.Windows.Forms;
+using ForDrives.Services.Interfaces;
 
 namespace ForDrives.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private const string ProductName = "ForDrives";
+
         public MainViewModel()
         {
-            applicationTitle = "ForDrives";
+            applicationTitle = ProductName;
             ReloadSettings();
         }
 
         private void ReloadSettings()
         {
-            currentSetting_Visibility = new DrivesVisibilityService().GetCurrentSettings();
-            currentSetting_Accessibilty = new DrivesAccessibilityService().GetCurrentSettings();
+            CurrentSetting_Visibility = new DrivesVisibilityService().GetCurrentSettings();
+            CurrentSetting_Accessibility = new DrivesAccessibilityService().GetCurrentSettings();
         }
+
+        private void ApplySetting(IDrivesService driveService, string userInput, bool isLocalMachine)
+        {
+            driveService.ForLocalMachine = isLocalMachine;
+
+            if ((!isLocalMachine) && (!driveService.RemoveGlobalSettings()))
+            {
+                cannotChangeOldSetting();
+                return;
+            }
+
+            if (driveService.SaveNewSettings(userInput))
+                showOK();
+            else
+                cannotSaveSetting();
+
+            ReloadSettings();
+        }
+
+        #region MessageBoxes
+
+        private void cannotSaveSetting()
+        {
+            WinForm.MessageBox.Show("写入注册表时发生错误，可能是 " + ProductName + " 被禁止访问注册表。\n",
+                   ProductName, WinForm.MessageBoxButtons.OK, WinForm.MessageBoxIcon.Error);
+        }
+
+        private void cannotChangeOldSetting()
+        {
+            WinForm.MessageBox.Show("删除原设置时发生错误，可能是 " + ProductName + " 被禁止访问注册表。\n",
+                    ProductName, WinForm.MessageBoxButtons.OK, WinForm.MessageBoxIcon.Error);
+        }
+
+        private void showOK()
+        {
+            WinForm.MessageBox.Show("设置完成，新的设置需要（注销并重新登录您的用户）或（重新启动计算机）后才能生效。",
+                ProductName, WinForm.MessageBoxButtons.OK, WinForm.MessageBoxIcon.Information);
+        }
+
+        #endregion
 
         #region Binding Properties
 
@@ -43,7 +87,7 @@ namespace ForDrives.ViewModels
 
         private string currentSetting_Accessibilty;
 
-        public string CurrentSetting_Accessibilty
+        public string CurrentSetting_Accessibility
         {
             get
             {
@@ -52,7 +96,7 @@ namespace ForDrives.ViewModels
             set
             {
                 currentSetting_Accessibilty = value;
-                OnPropertyChanged("DrivesAccessibiltyCurrentSetting");
+                OnPropertyChanged("CurrentSetting_Accessibility");
             }
         }
 
@@ -101,6 +145,21 @@ namespace ForDrives.ViewModels
             }
         }
 
+        private bool localMachineSelected;
+
+        public bool LocalMachineSelected
+        {
+            get
+            {
+                return localMachineSelected;
+            }
+            set
+            {
+                localMachineSelected = value;
+                OnPropertyChanged("LocalMachineSelected");
+            }
+        }
+
         #endregion
 
         #region Binding Commands
@@ -114,12 +173,13 @@ namespace ForDrives.ViewModels
                 return (applyVisibilityCommand ?? (applyVisibilityCommand = new CommandHandler(() => ApplyVisibilityAction(), true)));
             }
         }
-        
+
         private void ApplyVisibilityAction()
         {
-            MessageBox.Show("Visibility");
+            ApplySetting(new DrivesVisibilityService(), newSetting_Visibility, localMachineSelected);
+            ReloadSettings();
         }
-        
+
         private ICommand applyAccessibilityCommand;
 
         public ICommand ApplyAccessibilityCommand
@@ -129,12 +189,13 @@ namespace ForDrives.ViewModels
                 return (applyAccessibilityCommand ?? (applyAccessibilityCommand = new CommandHandler(() => ApplyAccessibilityAction(), true)));
             }
         }
-        
+
         private void ApplyAccessibilityAction()
         {
-            MessageBox.Show("Access");
+            ApplySetting(new DrivesAccessibilityService(), newSetting_Accessibility, localMachineSelected);
+            ReloadSettings();
         }
-        
+
         #endregion
 
     }

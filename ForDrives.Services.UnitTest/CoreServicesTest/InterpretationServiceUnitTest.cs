@@ -86,7 +86,7 @@ namespace ForDrives.Services.UnitTest
 
             Assert.AreEqual(expected, actual);
         }
-        
+
         [TestMethod]
         public void ToNumberTest3()
         {
@@ -96,7 +96,7 @@ namespace ForDrives.Services.UnitTest
 
             Assert.AreEqual(expected, actual);
         }
-        
+
         [TestMethod]
         public void ToNumberTest4()
         {
@@ -106,7 +106,7 @@ namespace ForDrives.Services.UnitTest
 
             Assert.AreEqual(expected, actual);
         }
-        
+
         [TestMethod]
         public void ToNumberTest5()
         {
@@ -123,6 +123,26 @@ namespace ForDrives.Services.UnitTest
             var interpreter = new InterpretationService();
             var expected = 67108863;
             var actual = interpreter.ToNumber("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ToNumberTest7()
+        {
+            var interpreter = new InterpretationService();
+            var expected = 0;
+            var actual = interpreter.ToNumber("");
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ToNumberTest8()
+        {
+            var interpreter = new InterpretationService();
+            var expected = 0;
+            var actual = interpreter.ToNumber(null);
 
             Assert.AreEqual(expected, actual);
         }

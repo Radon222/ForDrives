@@ -20,19 +20,22 @@ namespace ForDrives.Services.Core
 
             return result;
         }
-        
+
         public int ToNumber(string letters)
         {
+            int result = 0;
+            if (string.IsNullOrEmpty(letters))
+                return result;
+
             Func<int, int> pow2 = delegate (int x)
             {
                 return (int)Math.Pow(2, x);
             };
 
-            int result = 0;
             for (int i = 0; i < letters.Length; i++)
             {
                 var invalid = (letters[i] < 65) || (letters[i] > 90);
-                result += invalid ? 0 : pow2(letters[i] - 65);                
+                result += invalid ? 0 : pow2(letters[i] - 65);
             }
 
             return result;

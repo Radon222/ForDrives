@@ -56,11 +56,11 @@
                 <Grid>
                     <StackPanel>
                         <Label Style="{StaticResource LabelMargin}">Current settings:</Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" IsReadOnly="True" Text="{Binding CurrentSetting_Accessibilty}"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}" IsReadOnly="True" Text="{Binding CurrentSetting_Accessibility}"></TextBox>
                         <Label Style="{StaticResource LabelMargin}">New settings to be applied:</Label>
-                        <TextBox Style="{StaticResource TextBoxStyle}" CharacterCasing="Upper" Text="{Binding NewSetting_Accessibilty}"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}" CharacterCasing="Upper" Text="{Binding NewSetting_Accessibility}"></TextBox>
                         <Label Style="{StaticResource LabelMargin}">If you want to disable the setting, just leave the above field empty</Label>
-                        <Button Style="{StaticResource ButtonStyle}" Content="Apply"  Command="{Binding ApplyAccessibilityCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Content="Apply" Command="{Binding ApplyAccessibilityCommand}"></Button>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -69,7 +69,7 @@
                     <GroupBox Header="Apply to" Margin="20" VerticalAlignment="Top" MaxHeight="180">
                         <StackPanel>
                             <RadioButton Margin="10, 10, 10, 5" IsChecked="True">Current User</RadioButton>
-                            <RadioButton Margin="10, 10, 10, 5">Local Machine</RadioButton>
+                            <RadioButton Margin="10, 10, 10, 5" IsChecked="{Binding LocalMachineSelected}">Local Machine</RadioButton>
                         </StackPanel>
                     </GroupBox>
                 </Grid>
