@@ -22,6 +22,8 @@ namespace ForDrives.ViewModels
             ReloadSettings();
         }
 
+        #region Common Methods
+
         private void ReloadSettings()
         {
             CurrentSetting_Visibility = new DrivesVisibilityService().GetCurrentSettings();
@@ -45,6 +47,8 @@ namespace ForDrives.ViewModels
 
             ReloadSettings();
         }
+
+        #endregion
 
         #region MessageBoxes
 
