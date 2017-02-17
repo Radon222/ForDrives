@@ -4,9 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ForDrives"
+        xmlns:vm="clr-namespace:ForDrives.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        WindowStartupLocation="CenterScreen"          
+        Title="{Binding ApplicationTitle}" Height="350" Width="525"
+        DataContext="{DynamicResource MainViewModel}">
+    <Window.Resources>
+        <vm:MainViewModel x:Key="MainViewModel"/>
+    </Window.Resources>
     <Grid>
-        
+        <TabControl x:Name="tabControl" HorizontalAlignment="Stretch" Height="200" Margin="10,10,10,0" VerticalAlignment="Top" >
+            <TabItem Header="Drives Visibility">
+                <Grid>
+                    <StackPanel>
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Drives Accessibility">
+                <Grid></Grid>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>
