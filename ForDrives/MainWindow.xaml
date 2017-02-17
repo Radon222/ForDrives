@@ -39,7 +39,7 @@
     </Window.Resources>
 
     <Grid>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Top" >
+        <TabControl x:Name="tabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="18" >
             <TabItem Header="Drives Visibility">
                 <Grid>
                     <StackPanel>
@@ -66,7 +66,7 @@
             </TabItem>
             <TabItem Header="Effective Scope">
                 <Grid>
-                    <GroupBox Header="Apply to" Margin="50">
+                    <GroupBox Header="Apply to" Margin="20" VerticalAlignment="Top" MaxHeight="180">
                         <StackPanel>
                             <RadioButton Margin="10, 10, 10, 5" IsChecked="True">Current User</RadioButton>
                             <RadioButton Margin="10, 10, 10, 5">Local Machine</RadioButton>
