@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using ForDrives.Helpers;
+using System.Windows;
 
 namespace ForDrives.ViewModels
 {
@@ -15,6 +17,14 @@ namespace ForDrives.ViewModels
             applicationTitle = "ForDrives";
             ReloadSettings();
         }
+
+        private void ReloadSettings()
+        {
+            currentSetting_Visibility = new DrivesVisibilityService().GetCurrentSettings();
+            currentSetting_Accessibilty = new DrivesAccessibilityService().GetCurrentSettings();
+        }
+
+        #region Binding Properties
 
         private string applicationTitle;
 
@@ -29,12 +39,6 @@ namespace ForDrives.ViewModels
                     OnPropertyChanged("ApplicationTitle");
                 }
             }
-        }
-
-        private void ReloadSettings()
-        {
-            currentSetting_Visibility = new DrivesVisibilityService().GetCurrentSettings();
-            currentSetting_Accessibilty = new DrivesAccessibilityService().GetCurrentSettings();
         }
 
         private string currentSetting_Accessibilty;
@@ -96,5 +100,42 @@ namespace ForDrives.ViewModels
                 OnPropertyChanged("NewSetting_Accessibility");
             }
         }
+
+        #endregion
+
+        #region Binding Commands
+
+        private ICommand applyVisibilityCommand;
+
+        public ICommand ApplyVisibilityCommand
+        {
+            get
+            {
+                return (applyVisibilityCommand ?? (applyVisibilityCommand = new CommandHandler(() => ApplyVisibilityAction(), true)));
+            }
+        }
+        
+        private void ApplyVisibilityAction()
+        {
+            MessageBox.Show("Visibility");
+        }
+        
+        private ICommand applyAccessibilityCommand;
+
+        public ICommand ApplyAccessibilityCommand
+        {
+            get
+            {
+                return (applyAccessibilityCommand ?? (applyAccessibilityCommand = new CommandHandler(() => ApplyAccessibilityAction(), true)));
+            }
+        }
+        
+        private void ApplyAccessibilityAction()
+        {
+            MessageBox.Show("Access");
+        }
+        
+        #endregion
+
     }
 }
