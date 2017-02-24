@@ -18,6 +18,9 @@ namespace ForDrives.ViewModels
 
         public MainViewModel()
         {
+            applyVisibilityCommand = new RelayCommand(param => this.ApplyVisibilityAction(), param => true);
+            applyAccessibilityCommand = new RelayCommand(param => this.ApplyAccessibilityAction(), param => true);
+
             applicationTitle = ProductName;
             ReloadSettings();
         }
@@ -54,19 +57,19 @@ namespace ForDrives.ViewModels
 
         private void cannotSaveSetting()
         {
-            WinForm.MessageBox.Show("写入注册表时发生错误，可能是 " + ProductName + " 被禁止访问注册表。\n",
+            WinForm.MessageBox.Show("Cannot write to registry! \n",
                    ProductName, WinForm.MessageBoxButtons.OK, WinForm.MessageBoxIcon.Error);
         }
 
         private void cannotChangeOldSetting()
         {
-            WinForm.MessageBox.Show("删除原设置时发生错误，可能是 " + ProductName + " 被禁止访问注册表。\n",
+            WinForm.MessageBox.Show("Cannot delete old settings in the registry! \n",
                     ProductName, WinForm.MessageBoxButtons.OK, WinForm.MessageBoxIcon.Error);
         }
 
         private void showOK()
         {
-            WinForm.MessageBox.Show("设置完成，新的设置需要（注销并重新登录您的用户）或（重新启动计算机）后才能生效。",
+            WinForm.MessageBox.Show("Settings applied. Restart explorer.exe to see the effect! ",
                 ProductName, WinForm.MessageBoxButtons.OK, WinForm.MessageBoxIcon.Information);
         }
 
@@ -168,13 +171,13 @@ namespace ForDrives.ViewModels
 
         #region Binding Commands
 
-        private ICommand applyVisibilityCommand;
+        private readonly ICommand applyVisibilityCommand;
 
         public ICommand ApplyVisibilityCommand
         {
             get
             {
-                return (applyVisibilityCommand ?? (applyVisibilityCommand = new CommandHandler(() => ApplyVisibilityAction(), true)));
+                return applyVisibilityCommand;
             }
         }
 
@@ -184,13 +187,13 @@ namespace ForDrives.ViewModels
             ReloadSettings();
         }
 
-        private ICommand applyAccessibilityCommand;
+        private readonly ICommand applyAccessibilityCommand;
 
         public ICommand ApplyAccessibilityCommand
         {
             get
             {
-                return (applyAccessibilityCommand ?? (applyAccessibilityCommand = new CommandHandler(() => ApplyAccessibilityAction(), true)));
+                return applyAccessibilityCommand;
             }
         }
 
