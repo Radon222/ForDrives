@@ -1,13 +1,7 @@
-﻿using ForDrives.Services.Core;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Windows;
 using System.Windows.Input;
+using ForDrives.Services.Core;
 using ForDrives.Helpers;
-using System.Windows;
-using WinForm = System.Windows.Forms;
 using ForDrives.Services.Interfaces;
 
 namespace ForDrives.ViewModels
@@ -57,20 +51,20 @@ namespace ForDrives.ViewModels
 
         private void cannotSaveSetting()
         {
-            WinForm.MessageBox.Show("Cannot write to registry! \n",
-                   ProductName, WinForm.MessageBoxButtons.OK, WinForm.MessageBoxIcon.Error);
+            MessageBox.Show("Cannot write to registry! \n",
+                   ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void cannotChangeOldSetting()
         {
-            WinForm.MessageBox.Show("Cannot delete old settings in the registry! \n",
-                    ProductName, WinForm.MessageBoxButtons.OK, WinForm.MessageBoxIcon.Error);
+            MessageBox.Show("Cannot delete old settings in the registry! \n",
+                    ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void showOK()
         {
-            WinForm.MessageBox.Show("Settings applied. Restart explorer.exe to see the effect! ",
-                ProductName, WinForm.MessageBoxButtons.OK, WinForm.MessageBoxIcon.Information);
+            MessageBox.Show("Settings applied. Restart explorer.exe to see effects! ",
+                ProductName, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         #endregion
