@@ -19,15 +19,7 @@ namespace ForDrives.Services.Core
                 return -1;
             }
         }
-
-        public Task<int> GetValueAsync(string keyName, string valueName)
-        {
-            var taskSource = new TaskCompletionSource<int>();
-            var query = GetValue(keyName, valueName);
-            taskSource.SetResult(query);
-            return taskSource.Task;
-        }
-
+        
         public bool SetValue(string keyName, string valueName, object value)
         {
             try
@@ -39,14 +31,6 @@ namespace ForDrives.Services.Core
             {
                 return false;
             }
-        }
-
-        public Task<bool> SetValueAsync(string keyName, string valueName, object value)
-        {
-            var taskSource = new TaskCompletionSource<bool>();
-            var query = SetValue(keyName, valueName, value);
-            taskSource.SetResult(query);
-            return taskSource.Task;
-        }
+        }        
     }
 }

@@ -6,7 +6,5 @@ namespace ForDrives.Services.Interfaces
     {
         int GetValue(string keyName, string valueName);
         bool SetValue(string keyName, string valueName, object value);
-        Task<int> GetValueAsync(string keyName, string valueName);
-        Task<bool> SetValueAsync(string keyName, string valueName, object value);
     }
 }
