@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ForDrives.Services\ForDrives.Services.csproj">
+    <ProjectReference Include="..\..\Src\ForDrives.Services\ForDrives.Services.csproj">
       <Project>{89ecb21f-e5f0-4f6a-a129-af647547413f}</Project>
       <Name>ForDrives.Services</Name>
     </ProjectReference>

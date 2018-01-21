@@ -8,7 +8,6 @@ namespace ForDrives.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
-
         #region INotifyPropertyChanged implementation
 
         /// <summary>
