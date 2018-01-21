@@ -1,21 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDrives.Classic", "Src/ForDrives.Classic\ForDrives.Classic.csproj", "{86B68ABE-B8D9-463A-9D77-64C8609CBBD7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDrives.Classic", "Src\ForDrives.Classic\ForDrives.Classic.csproj", "{86B68ABE-B8D9-463A-9D77-64C8609CBBD7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{89ECB21F-E5F0-4F6A-A129-AF647547413F} = {89ECB21F-E5F0-4F6A-A129-AF647547413F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDrives.Services", "Src/ForDrives.Services\ForDrives.Services.csproj", "{89ECB21F-E5F0-4F6A-A129-AF647547413F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDrives.Services", "Src\ForDrives.Services\ForDrives.Services.csproj", "{89ECB21F-E5F0-4F6A-A129-AF647547413F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDrives.Services.UnitTest", "Test/ForDrives.Services.UnitTest\ForDrives.Services.UnitTest.csproj", "{FE987AC8-5870-45E9-ADED-90738A917E19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDrives.Services.UnitTest", "Test\ForDrives.Services.UnitTest\ForDrives.Services.UnitTest.csproj", "{FE987AC8-5870-45E9-ADED-90738A917E19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDrives", "Src/ForDrives\ForDrives.csproj", "{D5076BCE-96A4-4688-8546-0243D5AFBA38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDrives", "Src\ForDrives\ForDrives.csproj", "{D5076BCE-96A4-4688-8546-0243D5AFBA38}"
 	ProjectSection(ProjectDependencies) = postProject
 		{89ECB21F-E5F0-4F6A-A129-AF647547413F} = {89ECB21F-E5F0-4F6A-A129-AF647547413F}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A4D9E598-AF2E-477F-9AF3-69A4610AF71E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{970404C5-187A-4FCC-BA55-3878141C31B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,5 +46,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{89ECB21F-E5F0-4F6A-A129-AF647547413F} = {970404C5-187A-4FCC-BA55-3878141C31B8}
+		{FE987AC8-5870-45E9-ADED-90738A917E19} = {A4D9E598-AF2E-477F-9AF3-69A4610AF71E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F582CC5E-465F-40E1-AA48-2709E501AD58}
 	EndGlobalSection
 EndGlobal
